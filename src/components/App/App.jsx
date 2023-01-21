@@ -4,6 +4,7 @@ import ContactsForm from 'components/ContactsForm';
 import ContactsList from 'components/ContactsList/ContactsList';
 import Filter from 'components/Filter';
 import Notification from 'components/Notification';
+import { BsPencilFill } from 'react-icons/bs';
 // nanoid
 import { nanoid } from 'nanoid';
 //___APP___
@@ -107,11 +108,21 @@ export class App extends Component {
           }}
         >
           <h1>Phonebook</h1>
-          <ContactsForm createContact={this.createContact} />
-
+          {false && <ContactsForm createContact={this.createContact} />}
+          <button
+            type="button"
+            style={{
+              display: 'flex',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              gap: 15,
+            }}
+          >
+            <h3> Add your contacts</h3>
+            <BsPencilFill size={25} />
+          </button>
           <h2>Contacts</h2>
           <Filter value={filter} onChange={this.changeFilter} />
-
           {!this.getFiltredContacts().length ? (
             <Notification message="No contacts with the entered name!" />
           ) : (
