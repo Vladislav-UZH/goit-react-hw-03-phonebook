@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import Button from 'components/Button';
+
 const Container = styled.div`
   display: flex;
   font-size: 20px;
@@ -20,13 +22,5 @@ const Name = styled.span`
 const Number = styled.span`
   font-weight: 500;
 `;
-const DeleteBtn = styled.button`
-  color: #ffffff;
-  margin-left: auto;
-  padding: 5px 20px;
-  border-radius: 10px;
-  border: none;
-  background-color: #e2580a;
-`;
 
-export { Item, Name, Number, DeleteBtn, Container };
+export { Item, Name, Number, Container };

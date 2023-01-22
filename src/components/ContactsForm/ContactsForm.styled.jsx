@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Field, Form, ErrorMessage } from 'formik';
+const animationFunc = `cubic-bezier(.17,.67,.28,.85) 300ms`;
 
 const Container = styled(Form)`
   display: flex;
@@ -25,6 +26,7 @@ const Input = styled(Field)`
   border: none;
   border-radius: 10px;
   height: 30px;
+  transition: outline ${animationFunc};
   :focus {
     outline: 1px solid #e2580a;
   }
@@ -38,11 +40,6 @@ const Input = styled(Field)`
   background-color: #585a63;
 `;
 const SubmitBtn = styled.button`
-  font-size: 22px;
-  color: #ffffff;
-  width: 150px;
-  height: 50px;
-  padding: auto 50px;
   border-radius: 10px;
   border: none;
   background-color: #e2580a;

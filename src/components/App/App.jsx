@@ -7,16 +7,19 @@ import Notification from 'components/Notification';
 import { BsPencilFill } from 'react-icons/bs';
 // nanoid
 import { nanoid } from 'nanoid';
+import { AddContactsBtn } from '../Button/Button.styled';
 //___APP___
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '098-396-56-58' },
-      { id: 'id-2', name: 'Hermione Kline', number: '050-966-23-50' },
-      { id: 'id-3', name: 'Eden Clements', number: '099-663-10-22' },
-      { id: 'id-4', name: 'Annie Copeland', number: '099-423-66-19' },
-    ],
+    contacts: [],
+    //   [
+    //   { id: 'id-1', name: 'Rosie Simpson', number: '098-396-56-58' },
+    //   { id: 'id-2', name: 'Hermione Kline', number: '050-966-23-50' },
+    //   { id: 'id-3', name: 'Eden Clements', number: '099-663-10-22' },
+    //   { id: 'id-4', name: 'Annie Copeland', number: '099-423-66-19' },
+    // ]
     filter: '',
+    isOpen: false,
   };
   componentDidMount() {
     const contacts = this.getActualcontacts('contacts');
@@ -56,7 +59,7 @@ export class App extends Component {
     if (this.checkContactsForComplinance({ name, number })) {
       return this.notification(name);
     }
-
+    this.toggleContactBar();
     this.setState(({ contacts }) => {
       return { name, contacts: [{ name, number, id }, ...contacts] };
     });
@@ -86,6 +89,20 @@ export class App extends Component {
       name.toLowerCase().includes(normalizedFilter)
     );
   };
+  toggleContactsListOrNotification = () => {
+    return !this.getFiltredContacts().length ? (
+      <Notification message="No contacts with the entered name!" />
+    ) : (
+      <ContactsList
+        deleteContact={this.deleteContact}
+        contacts={this.getFiltredContacts()}
+      />
+    );
+  };
+  toggleContactBar = () => {
+    this.setState(prevState => ({ isOpen: !prevState.isOpen }));
+  };
+
   render() {
     const { filter } = this.state;
     return (
@@ -96,41 +113,32 @@ export class App extends Component {
           justifyContent: 'center',
           flexDirection: 'column',
           alignItems: 'center',
-          backgroundColor: '#22232B',
           color: '#DBD7D7',
         }}
       >
         <div
           style={{
+            minWidth: 680,
             borderRadius: 10,
             padding: 30,
             backgroundColor: '#32343B',
           }}
         >
-          <h1>Phonebook</h1>
-          {false && <ContactsForm createContact={this.createContact} />}
-          <button
-            type="button"
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-              gap: 15,
-            }}
-          >
-            <h3> Add your contacts</h3>
-            <BsPencilFill size={25} />
-          </button>
-          <h2>Contacts</h2>
-          <Filter value={filter} onChange={this.changeFilter} />
-          {!this.getFiltredContacts().length ? (
-            <Notification message="No contacts with the entered name!" />
+          <div></div>
+          <h1>Phonebook</h1>{' '}
+          {this.state.isOpen || !!this.state.contacts.length ? (
+            <ContactsForm createContact={this.createContact} />
           ) : (
-            <ContactsList
-              deleteContact={this.deleteContact}
-              contacts={this.getFiltredContacts()}
-            />
+            <AddContactsBtn onClick={this.toggleContactBar}>
+              Add your contacts
+              <BsPencilFill size={40} />
+            </AddContactsBtn>
           )}
+          <div>
+            <h2>Contacts</h2>
+            <Filter value={filter} onChange={this.changeFilter} />
+          </div>
+          {this.toggleContactsListOrNotification()}
         </div>
       </div>
     );

@@ -1,11 +1,6 @@
-import {
-  Item,
-  Name,
-  Number,
-  DeleteBtn,
-  Container,
-} from './ContactsItem.styled';
+import { Item, Name, Number, Container } from './ContactsItem.styled';
 import PropTypes from 'prop-types';
+import { DeleteButton } from 'components/Button/Button.styled';
 
 const ContactsItem = ({ name, number, deleteContact }) => {
   return (
@@ -15,7 +10,9 @@ const ContactsItem = ({ name, number, deleteContact }) => {
         <Number> {number}</Number>
       </Container>
 
-      <DeleteBtn onClick={deleteContact}>Delete</DeleteBtn>
+      <DeleteButton type="button" onClick={deleteContact}>
+        Delete
+      </DeleteButton>
     </Item>
   );
 };

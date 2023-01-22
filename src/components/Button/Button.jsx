@@ -1,4 +1,8 @@
-const Button = ({ type = 'button', title }) => {
-  return <button type={type}>{title}</button>;
+const Button = ({ type = 'button', title, children }) => {
+  return (
+    <button type={type}>
+      {title} {children}
+    </button>
+  );
 };
 export default Button;

@@ -1,12 +1,8 @@
 import { Component } from 'react';
 // Styles
-import {
-  Container,
-  Input,
-  Label,
-  SubmitBtn,
-  ErrorNotify,
-} from './ContactsForm.styled';
+import { Container, Input, Label, ErrorNotify } from './ContactsForm.styled';
+import { CreateContactBtn } from 'components/Button/Button.styled';
+
 // Formik
 import { Formik } from 'formik';
 // PropTypes
@@ -77,7 +73,7 @@ class ContactsForm extends Component {
 
             <ErrorNotify name="number" component="div" />
           </div>
-          <SubmitBtn type="submit">Add</SubmitBtn>
+          <CreateContactBtn type="submit">Add</CreateContactBtn>
         </Container>
       </Formik>
     );
