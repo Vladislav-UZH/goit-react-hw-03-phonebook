@@ -47,4 +47,6 @@ const CreateContactBtn = styled.button`
   width: 150px;
   height: 50px;
 `;
+
+// const Icon = styled.svg``;
 export { AddContactsBtn, DeleteButton, CreateContactBtn };
